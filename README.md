@@ -1,7 +1,7 @@
 # Advent Calendar
 Ceci est un micro projet pour le fun qui est un calendrier de l'avent avec certaines condition pour pimenté la chose.
 
-# CONDITION
+## Condition
 
 - C'est un projet fait avec HTML/CSS/JS.
 - Le tout doit etre responsive.
@@ -9,5 +9,5 @@ Ceci est un micro projet pour le fun qui est un calendrier de l'avent avec certa
 - Avoir un bouton pour reset.
 - Les couleurs de chaque cases numéroté serront aléatoire.
 
-# DEADLINE 
+## Deadline 
 2 Décembre 2024
