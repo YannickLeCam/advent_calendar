@@ -1,3 +1,24 @@
 body{
     background-color: blue;
 }
+
+#box{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.giftBox{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.bigGiftBox{
+    grid-column: span 2;
+}
+
+.lastGiftBox{
+    grid-column: span 2;
+    grid-row:span 2;
+}
