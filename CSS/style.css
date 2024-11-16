@@ -10,15 +10,25 @@ body{
 .giftBox{
     display: flex;
     justify-content: center;
-    text-align: center;
     align-items: center;
+    padding: 10px;
+    background-color: lightgray;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #ccc;
 }
 
 .bigGiftBox{
     grid-column: span 2;
+    background-color: gold;
+    font-weight: bold;
 }
 
 .lastGiftBox{
     grid-column: span 2;
     grid-row:span 2;
+    background-color: red;
+    color: white;
 }
+

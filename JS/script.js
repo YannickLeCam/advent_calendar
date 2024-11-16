@@ -41,9 +41,9 @@ function createGifts() {
     for (let index = 0; index < 24; index++) {
         var giftBox = document.createElement('div');
         giftBox.classList.add('giftBox');
-        if (index===bigGiftIndex) {
+        if (index === bigGiftIndex) {
             giftBox.classList.add('bigGiftBox');
-            bigGiftIndex+=7;
+            bigGiftIndex += 7;
         }
         if (index === 23) {
             giftBox.classList.add('lastGiftBox');
@@ -51,12 +51,49 @@ function createGifts() {
         var texteGift = document.createElement('p');
         texteGift.textContent = index + 1;
         giftBox.appendChild(texteGift);
+
+        // Ajouter un event listener pour afficher la citation
+        giftBox.addEventListener('click', function () {
+            showQuote(quotes[index]);
+        });
+
         giftsList.push(giftBox);
     }
-    shuffle(giftsList);  // Mélanger la liste des cadeaux
+    shuffle(giftsList);
 
-    // Ajouter les cadeaux mélangés au calendrier de l'avent
+    // Ajouter les cadeaux mélangés au calendrier
     giftsList.forEach(gift => boxAdventCalendar.appendChild(gift));
+}
+
+function showQuote(quote) {
+    // Créer une div pour l'assombrissement
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = 1000;
+
+    // Ajouter la citation
+    const quoteText = document.createElement('p');
+    quoteText.textContent = quote;
+    quoteText.style.color = 'white';
+    quoteText.style.fontSize = '2rem';
+    quoteText.style.textAlign = 'center';
+    quoteText.style.margin = '0 20px';
+
+    // Ajouter un event listener pour fermer la citation
+    overlay.addEventListener('click', function () {
+        document.body.removeChild(overlay);
+    });
+
+    overlay.appendChild(quoteText);
+    document.body.appendChild(overlay);
 }
 
 createGifts();
