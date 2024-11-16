@@ -26,6 +26,7 @@ const quotes = [
 ];
 
 const boxAdventCalendar = document.getElementById('box');
+const openedStatus = Array(24).fill(false); // Tableau pour suivre l'état d'ouverture des cadeaux
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -45,16 +46,19 @@ function createGifts() {
             giftBox.classList.add('bigGiftBox');
             bigGiftIndex += 7;
         }
-        if (index === 23) {
-            giftBox.classList.add('lastGiftBox');
-        }
+        if (index === 23) giftBox.classList.add('lastGiftBox');
+
         var texteGift = document.createElement('p');
         texteGift.textContent = index + 1;
         giftBox.appendChild(texteGift);
 
-        // Ajouter un event listener pour afficher la citation
+        // Ajouter un event listener pour gérer l'ouverture
         giftBox.addEventListener('click', function () {
-            showQuote(quotes[index]);
+            if (index === 0 || openedStatus[index - 1]) {
+                openedStatus[index] = true; // Marquer ce cadeau comme ouvert
+                showQuote(quotes[index]);
+                giftBox.classList.add('opened');
+            }
         });
 
         giftsList.push(giftBox);
