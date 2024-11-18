@@ -37,33 +37,38 @@ function shuffle(array) {
 }
 
 function createGifts() {
-    var giftsList = [];
-    var bigGiftIndex = 0;
-    for (let index = 0; index < 24; index++) {
-        var giftBox = document.createElement('div');
+    const giftsList = [];
+    const indices = [...Array(24).keys()]; // Tableau des indices 0 à 23
+    shuffle(indices); // Mélanger les indices
+    let bigGiftIndex = [0,7,14,21];
+
+    for (let i = 0; i < 24; i++) {
+        const originalIndex = indices[i]; // L'indice réel associé à ce cadeau
+        const giftBox = document.createElement('div');
         giftBox.classList.add('giftBox');
-        if (index === bigGiftIndex) {
+
+        if (bigGiftIndex.includes(originalIndex)) {
+            console.log(originalIndex, i);
             giftBox.classList.add('bigGiftBox');
             bigGiftIndex += 7;
         }
-        if (index === 23) giftBox.classList.add('lastGiftBox');
+        if (originalIndex === 23) giftBox.classList.add('lastGiftBox');
 
-        var texteGift = document.createElement('p');
-        texteGift.textContent = index + 1;
+        const texteGift = document.createElement('p');
+        texteGift.textContent = originalIndex + 1; // Numéro réel du cadeau
         giftBox.appendChild(texteGift);
 
         // Ajouter un event listener pour gérer l'ouverture
         giftBox.addEventListener('click', function () {
-            if (index === 0 || openedStatus[index - 1]) {
-                openedStatus[index] = true; // Marquer ce cadeau comme ouvert
-                showQuote(quotes[index]);
+            if (originalIndex === 0 || openedStatus[originalIndex - 1]) {
+                openedStatus[originalIndex] = true; // Marquer ce cadeau comme ouvert
+                showQuote(quotes[originalIndex]);
                 giftBox.classList.add('opened');
             }
         });
 
         giftsList.push(giftBox);
     }
-    shuffle(giftsList);
 
     // Ajouter les cadeaux mélangés au calendrier
     giftsList.forEach(gift => boxAdventCalendar.appendChild(gift));
