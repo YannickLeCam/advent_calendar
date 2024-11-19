@@ -40,19 +40,21 @@ function createGifts() {
     const giftsList = [];
     const indices = [...Array(24).keys()]; // Tableau des indices 0 à 23
     shuffle(indices); // Mélanger les indices
-    let bigGiftIndex = [0,7,14,21];
+
+    // Déterminer les "big gifts"
+    const bigGiftIndices = [0, 7, 14, 21]; // Les indices initiaux des gros cadeaux
 
     for (let i = 0; i < 24; i++) {
         const originalIndex = indices[i]; // L'indice réel associé à ce cadeau
         const giftBox = document.createElement('div');
         giftBox.classList.add('giftBox');
 
-        if (bigGiftIndex.includes(originalIndex)) {
-            console.log(originalIndex, i);
+        if (bigGiftIndices.includes(originalIndex)) {
             giftBox.classList.add('bigGiftBox');
-            bigGiftIndex += 7;
         }
-        if (originalIndex === 23) giftBox.classList.add('lastGiftBox');
+        if (originalIndex === 23) {
+            giftBox.classList.add('lastGiftBox');
+        }
 
         const texteGift = document.createElement('p');
         texteGift.textContent = originalIndex + 1; // Numéro réel du cadeau
